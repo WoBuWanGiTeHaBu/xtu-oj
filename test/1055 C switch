@@ -1,0 +1,29 @@
+#switch存在感太低，写的时候忘记了
+#思路：用else if 。用temp把输出集中在最后
+#注：pow有精度问题，之后不要常用。
+#代码：
+
+#include<stdio.h>
+#include<math.h>
+int main(){
+    double x;
+    double y=0;
+    int temp=0;
+    scanf("%lf",&x);
+    if(x>=0&&x<10){
+        y=cos(x+3);
+    }else if(x>=10&&x<20){
+        y=pow(cos(x+7.5),2);
+    }else if(x>=20&&x<30){
+        y=pow(cos(x+4),4);
+    }else{
+        temp=1;
+    }
+    if(temp){
+        printf("Not define");
+    }else{
+        printf("%.5f",y);
+    }
+    
+    return 0;
+}
