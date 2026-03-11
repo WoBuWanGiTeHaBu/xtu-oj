@@ -1,0 +1,33 @@
+#思路：
+#把各位数字提取出来，重复步骤用for循环，所以用整数数组来存数字。
+#每两个数字对比一次（用for循环套for循环实现），要是相等就计数一次。有且仅有两个，所以yes时cnt只能=1。
+#代码：
+
+
+#include<stdio.h>
+int main(){
+    int str[3]={0};
+    int n=0;
+    scanf("%d",&n);
+    int i,o;
+    for(i=0;i<3;i++){
+        str[i]=n%10;
+        n/=10;
+    }
+    int cnt=0;
+    for(i=0;i<3;i++){
+        for(o=i+1;o<3;o++){
+            if(str[i]==str[o]){
+                cnt++;
+            }
+        }
+    }
+    if(cnt==1){
+        printf("Yes");
+    }else{
+        printf("No");
+    }
+
+
+    return 0;
+}
