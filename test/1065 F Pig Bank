@@ -1,0 +1,25 @@
+//思路：小学数学 
+//错误：要注意特殊情况。题目没说明，就是有可能 
+
+
+#include<stdio.h>
+#include<math.h>
+int main(){
+	int n;
+	scanf("%d",&n);
+	while(n--){
+		int a,b,c;
+		scanf("%d %d %d",&a,&b,&c);
+		int cnt=(c-a)/b;
+		if((c-a)%b){
+			cnt++;
+		} 
+		if(c<a){
+			cnt=0;
+		}
+		printf("%d\n",cnt);
+	}
+	
+	
+	return 0;
+}
