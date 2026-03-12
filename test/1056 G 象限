@@ -1,0 +1,32 @@
+//思路：本来的打算是根据同号异号来分，但是*会移除变负 
+//错误：不仅要考虑变量本身范围，还要考虑计算中的范围 
+
+
+#include<stdio.h>
+#include<math.h>
+int main(){
+	int n;
+	scanf("%d",&n);
+	while(n--){
+		int x,y;
+		scanf("%d %d",&x,&y);
+		int temp=0;
+		if(x>0){
+			if(y>0){
+				temp=1;
+			}else{
+				temp=4;
+			}
+		}else{
+			if(y>0){
+				temp=2;
+			}else{
+				temp=3;
+			}
+		}
+		printf("%d\n",temp);
+	}
+	
+	
+	return 0;
+}
