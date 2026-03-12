@@ -1,0 +1,15 @@
+//思路：高中知识，加上acos（-1） 
+//%g:自动选%f %e两种方式会去掉末尾多余的0
+ 
+
+#include<stdio.h>
+#include<stdio.h>
+int main(){
+	float a,b,p;
+	double pi=acos(-1);
+	scanf("%f %f %f",&a,&b,&p);
+	float c=sqrt(a*a+b*b-2*a*b*cos(p/180*pi));
+	printf("%g",c);
+
+	return 0;
+}
