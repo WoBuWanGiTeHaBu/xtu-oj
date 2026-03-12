@@ -1,0 +1,48 @@
+//思路：1冒泡排序（两个for分别表示轮数和元素）
+//	2用max，min比较，但是不知道范围慎用。
+//	
+//错误：冒泡不用附近对比会乱套：
+//    for(i=0;i<3;i++){
+//        for(o=0;o<2;o++){
+//            if(num[i]>num[o]){//i没变，num[i]变了 
+//                temp=num[i];
+//                num[i]=num[o];
+//                num[o]=temp;
+//            }
+//        }
+//    }
+
+
+#include<stdio.h>
+int main(){
+	int num[3]={0};
+	int i,o;
+	int temp;
+	for(i=0;i<3;i++){
+		scanf("%d",&num[i]);
+	}
+	
+//	for(i=0;i<3;i++){
+//		for(o=0;o<2;o++){
+//			if(num[o]>num[o+1]){
+//				temp=num[o];
+//				num[o]=num[o+1];
+//				num[o+1]=temp;
+//			}
+//		} 
+//	}
+//	printf("%d %d",num[2],num[0]);
+	int max=0;
+	int min=10000000;
+	for(i=0;i<3;i++){
+		if(num[i]<min){
+			min=num[i];
+		}
+		if(num[i]>max){
+			max=num[i];
+		}
+	}
+	
+	printf("%d %d",max,min);
+	return 0;
+}
