@@ -1,0 +1,9 @@
+#include<stdio.h>
+#include<math.h>
+int main(){
+	float ax,ay,bx,by;
+	scanf("%f %f %f %f",&ax,&ay,&bx,&by);
+	printf("%g",sqrt((ax-bx)*(ax-bx)+(ay-by)*(ay-by)));
+	
+	return 0;
+}
