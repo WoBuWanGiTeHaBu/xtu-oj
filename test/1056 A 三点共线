@@ -1,0 +1,40 @@
+//思路：就三个点，用斜率来算最方便
+//错误：斜率法还要考虑特殊情况：1.没斜率的， 
+//2.两个点重合的。 用goto 补一下。 
+
+
+#include<stdio.h>
+
+int main(){
+	int n;
+	scanf("%d",&n);
+	while(n--){
+		int ax,ay,bx,by,cx,cy;
+		scanf("%d %d",&ax,&ay);
+		scanf("%d %d",&bx,&by);
+		scanf("%d %d",&cx,&cy);
+		float k1,k2;
+		if(ax==bx&&ax==cx||ay==by&&ay==cy||ax==bx&&ay==by||ax==cx&&ay==cy||bx==cx&&by==cy){
+			goto next;
+		}
+		if(ax>bx){
+			k1=(ax-bx)*1.000/(ay-by);
+		}else{
+			k1=(bx-ax)*1.000/(by-ay);
+		}
+		if(ax>cx){
+			k2=(ax-cx)*1.000/(ay-cy);
+		}else{
+			k2=(cx-ax)*1.000/(cy-ay);
+		}
+		if(k1==k2){
+			next:
+			printf("Yes\n");
+		}else{
+			printf("No\n");
+		}
+		
+	}
+	
+	return 0;
+}
