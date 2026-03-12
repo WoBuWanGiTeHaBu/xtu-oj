@@ -1,0 +1,21 @@
+//思路：先比大小，再根据差值的1/2来。先强制转换成浮点数。
+//错误：谁给谁钱理清楚。输出要加\n!;
+#include<stdio.h>
+int main(){
+	int n;
+	scanf("%d",&n);
+	while(n--){
+		int x,y;
+		scanf("%d %d",&x,&y);
+		if(x>y){
+			printf("Bob %g\n",(x-y)*1.000/2);
+		}else if(y>x){
+			printf("Alice %g\n",(y-x)*1.000/2);
+		}else{
+			printf("None\n");
+		}
+	}
+	
+	
+	return 0;
+}
