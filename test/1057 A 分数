@@ -1,0 +1,56 @@
+//思路：我最爱sun and mum 表达这类分式最恶心的地方在于，会超过，除了这个，还有最大公因数的函数的写法；
+//错误：哈哈哈超了。全改用long long 了；
+//最大错误：我用函数的时候，没大函数名，揣着个（）就去了。
+
+
+
+
+
+
+
+#include<stdio.h>
+long long gcd(long long a,long long b){
+	long long q;
+	q=a%b;
+	while(q){
+		a=b;
+		b=q;
+		q=a%b;
+	}
+	return b;
+	
+}
+
+
+int main(){
+	int n;
+	scanf("%d",&n);
+	while(n--){
+		long long a,b,c;
+		scanf("%lld %lld %lld",&a,&b,&c);
+		long long sun=0,mum=0;
+		sun=a*c-b*b;
+		mum=b*c;
+		long long g=gcd(sun,mum);
+		sun/=g;
+		mum/=g;
+		sun=sun*a+c*mum;
+		mum=mum*a;
+		g=gcd(sun,mum);
+		sun/=g;
+		mum/=g;
+		if(mum<0){
+			mum=-mum;
+			sun=-sun;
+		}
+		if(mum==1){
+			printf("%lld\n",sun);
+		
+		}else{
+			printf("%lld/%lld\n",sun,mum);
+		}
+		
+	}
+	
+	return 0;
+}
