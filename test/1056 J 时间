@@ -1,0 +1,21 @@
+//思路：根据时间之间的进制合理选择/ 或者% ；
+//知道怎么让输出符合格式
+
+
+
+
+#include<stdio.h>
+int main(){
+	int n;
+	scanf("%d",&n);
+	while(n--){
+		int t;
+		scanf("%d",&t);
+		int h=t/3600;
+		int m=(t/60)%60;
+		int s=t%60;
+		printf("%02d:%02d:%02d\n",h,m,s);
+	}
+	
+	return 0;
+}
