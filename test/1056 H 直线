@@ -1,0 +1,98 @@
+//思路就是高中数学；
+//错误：1.一开始没有把0考虑进去导致后面发现问题打补丁的时候乱七八糟，怒而重开
+//2.后面逻辑严谨的分了每一类，但是：%lld 整数除法会丢失精度
+//3.。。。。。。。。。其实垂直也可以用乘法判断。
+#include <stdio.h>
+
+int main() {
+    long long a1, b1, c1, a2, b2, c2;
+    // 注意：long long 必须用 %lld
+    scanf("%lld %lld %lld", &a1, &b1, &c1);
+    scanf("%lld %lld %lld", &a2, &b2, &c2);
+
+    // 平行或共线
+    if (a1 * b2 == a2 * b1) {
+        // 共线判断（全部成比例）因为这样才能把0的干扰包含在内
+        if (a1 * c2 == a2 * c1 && b1 * c2 == b2 * c1) {
+            printf("collinear\n");
+        } else {
+            printf("parallel\n");
+        }
+    } else {
+        // 垂直判断：a1*a2 + b1*b2 == 0
+        if (a1 * a2 + b1 * b2 == 0) {
+            printf("vertical\n");
+        } else {
+            printf("intersect\n");
+        }
+    }
+
+    return 0;
+}
+
+
+#include<stdio.h>
+int main(){
+	long long a1,b1,c1,a2,b2,c2;
+	scanf("%lld %lld %lld",&a1,&b1,&c1);
+	scanf("%lld %lld %lld",&a2,&b2,&c2);
+	if(a1*a2==0){
+		if(a1==0&&a2==0){
+			if(1.000000*c1/b1==1.000000*c2/b2){
+				printf("collinear");
+			}else{
+				printf("parallel");
+			}
+		}else if(a1==0&&a2!=0){
+			if(b2==0){
+				printf("vertical");
+			}else{
+				printf("intersect");
+			}
+		}else if(a2==0&&a1!=0){
+			if(b1==0){
+				printf("vertical");
+			}else{
+				printf("intersect");
+			}
+		}
+	}else if(b1*b2==0){
+		if(b1==0&&b2==0){
+			if(1.000000*c1/a1==1.000000*c2/a2){
+				printf("collinear");
+			}else{
+				printf("parallel");
+			}
+		}else if(b1==0&&b2!=0){
+			if(a2==0){
+				printf("vertical");
+			}else{
+				printf("intersect");
+			}
+		}else if(b1!=0&&b2==0){
+			if(b1==0){
+				printf("vertical");
+			}else{
+				printf("intersect");
+			}
+		}
+	}else{
+		if(1.000000*a1*b2==1.000000*a2*b1){
+			if(a1*c2==a2*c1){
+				printf("collinear");
+			}else{
+				printf("parallel");
+			}
+		}else{
+			if((1.000000*a1/b1)*(1.000000*a2/b2)==-1){
+				printf("vertical");
+			}else{
+				printf("intersect");
+			}
+		}
+	}
+	
+	
+	return 0;
+}
+ 
