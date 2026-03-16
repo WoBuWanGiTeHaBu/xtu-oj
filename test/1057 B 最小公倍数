@@ -1,0 +1,25 @@
+//是上次提到的gcd函数捏。原理没理解，但是我记熟了
+//注意范围
+
+#include<stdio.h>
+long long gcd(long long a,long long b){
+	long long q;
+	q=a%b;
+	while(q){
+		a=b;
+		b=q;
+		q=a%b;
+	}
+	return b;
+	
+}
+
+
+int main(){
+	long long a,b;
+	while(scanf("%lld %lld",&a,&b),!(a==0&&b==0)){
+		long long g=gcd(a,b);
+		printf("%lld\n",(a/g)*b);
+	} 
+		return 0;
+}
