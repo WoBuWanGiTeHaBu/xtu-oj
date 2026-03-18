@@ -1,0 +1,47 @@
+//蠢作者古典概型都忘了，大概是功力散尽了
+//思路：根据概率公式列出式子，后续和之前一样的处理，因为没有涉及除法，所以不考虑谁会变为0的情况。
+//在最后加上判断，这样就不用一开始判断后，还要操作，这种直接盖了
+
+
+
+
+#include<stdio.h>
+int gcd(int a,int b){
+	int q;
+	q=a%b;
+	while(q){
+		a=b;
+		b=q;
+		q=a%b;
+	}
+	return b;
+}
+
+
+int main(){
+	int t;
+	scanf("%d",&t);
+	while(t--){
+		int n,m;
+		scanf("%d %d",&n,&m);
+		int sun=m*(m-1)*(m-2);
+		int mum=n*(n-1)*(n-2);
+		int g=gcd(sun,mum);
+		sun/=g;
+		mum/=g;
+		if(m<3){
+			printf("0\n");
+		}else if(mum==1){
+			printf("%d\n",sun);
+		}else{
+			printf("%d/%d\n",sun,mum);
+		}
+		
+		
+		
+	}
+	
+	
+	
+	return 0;
+}
