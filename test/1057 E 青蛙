@@ -1,0 +1,39 @@
+//ok呀，也是手误删除忘记ctrl+z了
+//思路：k=隔了几个位置。s=k+1=一次总共走了几个位置，t=总共走了几次。n=总共有几个位置，m=走了几圈（总路程/n);
+//s*t=总路程=n*m-->s*t=n*m（其他三个整数所以m也是整数）  m=s*t/n;m是结果，s是固定的，只有t是我们用来计算取数的。
+//要使m是整数，则s*t整除n前面说了，只有t可取，如果s和n有!1共因数，那么t只能取n/g(公因数）才能使之为整数，而这时，t一定<n，且已经回到起点了，到时候又是重复的
+//所以有公因数就不会把n个位置都走完。
+
+//错误:把输入中n,k的位置搞反了。
+
+
+#include<stdio.h>
+int gcd(int a,int b){
+	int q;
+	q=a%b;
+	while(q){
+		a=b;
+		b=q;
+		q=a%b;
+	}
+	return b;
+}
+
+
+int main(){
+	int t;
+	scanf("%d",&t);
+	while(t--){
+		int k,n;
+		scanf("%d %d",&n,&k);
+		int g=gcd(k+1,n);
+		if(g==1){
+			printf("Yes\n");
+		}else{
+			printf("No\n");
+		}
+		
+	}
+	
+	return 0;
+}
