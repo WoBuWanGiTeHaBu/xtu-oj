@@ -1,0 +1,56 @@
+//思路就是普普通通sun&mum，只是要分多步；
+//因为有多个重复步骤，这时候就想到了自定义函数，gcd自然不用讲了；
+//这个easy是化简函数。因为需要把两个值传出去所以普通的函数肯定不行，这里用到了指针；
+//指针学艺不精，接下来全是主包自我理解用。
+//把要化简的两个数的地址
+
+
+
+
+
+#include<stdio.h>
+long long gcd(long long a,long long b){
+	long long q;
+	q=a%b;
+	while(q){
+		a=b;
+		b=q;
+		q=a%b;
+	}
+	return b;
+}
+
+void easy(long long* a,long long*b){
+	long long g=gcd(*a,*b);
+	*a/=g;
+	*b/=g;
+}
+
+int main(){
+	int k;
+	scanf("%d",&k);
+	while(k--){
+		long long a,b;
+		scanf("%lld %lld",&a,&b);
+		long long S=a*a+b*b;
+		long long sunh=b*a*a;//干脆把面积一起算了。 
+		long long mumh=(a+b)*2;
+		easy(&sunh,&mumh);
+		long long sunh2=b*b*b;
+		long long mumh2=(a+b)*2;
+		easy(&sunh2,&mumh2);
+		long long sum_sun=sunh*mumh2+sunh2*mumh;
+		long long sum_mum=mumh*mumh2;
+		easy(&sum_sun,&sum_mum);
+		long long sun=S*sum_mum-sum_sun;
+		easy(&sun,&sum_mum);
+		if(sum_mum==1){
+			printf("%lld\n",sun);
+		}else{
+			printf("%lld/%lld\n",sun,sum_mum);
+		}
+		
+		
+	}
+	return 0;
+} 
