@@ -1,0 +1,42 @@
+//思路：首先有n个公司，如果压结果肯定压n个公司中这个结果赔率最高的那个；
+//也就是说，比较完最大最小值之后，就只用考虑3个数，分别对应赢平输；
+//因为最终只会有1个结果，所以这一个结果对了，就得负担起其他两个的损失：
+//假设总投入为1,那么就有  结果赔率*投入数额-1>0；投入数额就得>1/结果赔率；
+//把三个最低的投入数额加起来如果小于等于1，那么就可行。否则不行。
+//错误：加了两个x2(汗颜
+//警告：不要去博彩！因为这是十分抽象简化的情况，事实上，你永远不可能赚到钱！
+
+
+
+#include<stdio.h>
+int main(){
+	int t;
+	scanf("%d",&t);
+	while(t--){
+		int n;
+		scanf("%d",&n);
+		double list[n][3];
+		double maxwdl[3]={0};
+		int i,o;
+		for(i=0;i<n;i++){
+			scanf("%lf %lf %lf",&list[i][0],&list[i][1],&list[i][2]);
+		}
+		for(i=0;i<3;i++){
+			for(o=0;o<n;o++){
+				if(list[o][i]>maxwdl[i]){
+					maxwdl[i]=list[o][i];
+				}
+			}
+		}
+		double x1=1.0000000000/maxwdl[0];
+		double x2=1.0000000000/maxwdl[1];
+		double x3=1.0000000000/maxwdl[2];
+		if(x1+x2+x3>1){
+			printf("No\n");
+		}else{
+			printf("Yes\n");
+		}
+		
+	}	
+	return 0;
+}
