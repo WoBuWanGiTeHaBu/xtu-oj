@@ -1,0 +1,43 @@
+//从A到B肯定要用到循环，还是sun&mum我直接复制过来了。
+
+
+
+#include<stdio.h>
+
+#include<stdio.h>
+long long gcd(long long a,long long b){
+	long long q;
+	q=a%b;
+	while(q){
+		a=b;
+		b=q;
+		q=a%b;
+	}
+	return b;
+}
+
+void easy(long long* a,long long*b){
+	long long g=gcd(*a,*b);
+	*a/=g;
+	*b/=g;
+}
+
+
+int main(){
+	int t;
+	scanf("%d",&t);
+	while(t--){
+		long long a,b;
+		scanf("%d %d",&a,&b);
+		int i;
+		long long sun=1;
+		long long mum=a;
+		for(i=a+1;i<=b;i++){
+			sun=sun*i+mum;
+			mum=i*mum;
+			easy(&sun,&mum);	
+		}
+		printf("%lld/%lld\n",sun,mum);
+	}	
+	return 0;
+}
