@@ -1,0 +1,53 @@
+//先是思考了一番，为什么选择prim而不是Kruskal。因为这个题目给的是数组形式的数据，如果按边来的话还得自己处理一遍数据。
+//然后Prim按点来选择，先选一个初始点，把这个点看作一个集合里的，去找离这个集合最近的点纳入这个集合，然后更新其他点离这个集合的距离有没有更近，有就更新。
+//因为之前的老点已经是更新过了的，所以只需要把这个新点的和老点的对比就行了。求和那么就在这个过程中求了。
+//所以我们需要：距离储存数组W【】【】，标志数组S【】，存储离目前集合最近距离数组D【】。然后加一个用不到的Path数组。
+//Prim和Kruskal都是贪心，和Dijkstra不一样的是，D用来找点到其他点的最短距离，P（用点）和K（用边）来找最小生成树。
+
+#include<stdio.h>
+int main(){
+	int n;
+	scanf("%d",&n);
+	int W[n+1][n+1];
+	int i,o;
+	for(i=1;i<n+1;i++){
+		for(o=1;o<n+1;o++){
+			scanf("%d",&W[i][o]);
+		}
+	}
+	int S[n+1];
+	int P[n+1];
+	int D[n+1];
+	for(i=1;i<n+1;i++){
+		S[i]=0;
+		P[i]=0;
+		D[i]=W[1][i];
+	}
+	S[1]=1;
+	int cnt=n-1;
+	int arr=1;
+	int brr=1;
+	int sum=0;
+	int min=10000000;
+	while(cnt--){
+		min=10000000;
+		for(i=1;i<n+1;i++){
+			if(S[i]==0&&D[i]<min){
+				min=D[i];
+				brr=i;
+			}
+		}
+		sum+=min;
+		S[brr]=1;
+		P[brr]=arr;
+		for(i=1;i<n+1;i++){//daozhegejihe
+			if(D[i]>W[brr][i]){
+				D[i]=W[brr][i];
+			} 
+		}
+		arr=brr;
+	}
+	
+	printf("%d",sum);
+	return 0;
+}
