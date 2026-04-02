@@ -1,0 +1,79 @@
+//因为一直战胜不了睡觉，写这题的时间零零碎碎的出现了很多错误。
+//前面的最优布线问题提供的是一个矩阵用prim比用kruskal方便。prim按点来，主要在迭代和集合的距离。kruskal按边来，主要是排序和防止成回路/
+//排序一开始我是只会冒泡的，还是上课老师提了一嘴才知道qsort问了豆包后打开新世界大门。
+//因为边带端点，用基础数组绕来绕去。这里就需要一个结构体，有了结构体我们可有把这三个值一起带着排序。
+//结构体的使用方式注意的是，用[].i来指向值。指针版本是用->注意如果前面有强制转换一定把前面的都括起来。
+//qsort在stdlib里（数组首地址，元素个数，每个元素的大小，比较函数）
+//cmp是要我们自己搞的，前面-后面，从小到大排。
+//这是排序，最出错的是放回路，运用集合的思想。
+//一开始是把所有点看成在一个集合内，多写了。
+//后面改成一开始就是n个集合。在确定归入那个集合时，忽视了拿变化的集合值做参照会有错误。后面用temp暂储了一下。
+//还有的就是一些杂七杂八的张冠李戴。
+//循环终止条件的选择也很重要
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct edge{
+	int i,j,w;
+};
+
+int cmp(const void * a,const void *b){
+	return ((struct edge*)a)->w-((struct edge*)b)->w;
+}
+
+int main(){
+	int n,e;
+	scanf("%d %d",&n,&e);
+	int i,o;
+	struct edge E[e];
+	for(i=0;i<e;i++){
+		scanf("%d %d %d",&E[i].i,&E[i].j,&E[i].w);
+	}
+	qsort(E,e,sizeof(struct edge),cmp);
+	int sum=0;
+	int S[n+1];
+	int temp=0;
+	for(i=0;i<n+1;i++){
+		S[i]=i;
+	}
+	int cont=0;
+	for(i=0;i<e&&cont<n-1;i++){
+		if(S[E[i].i]==S[E[i].j]){
+			continue;
+		}else if(S[E[i].j]!=S[E[i].i]){
+			if(S[E[i].i]<S[E[i].j]){
+				temp=S[E[i].j];
+				for(o=1;o<n+1;o++){
+					if(S[o]==temp){
+						S[o]=S[E[i].i];
+					}
+				}
+			}else{
+				temp=S[E[i].i];
+				for(o=1;o<n+1;o++){
+					if(S[o]==temp){
+						S[o]=S[E[i].j];
+					}
+				}
+			}
+		}
+		sum+=E[i].w;
+		cont++;
+	}
+	printf("%d\n",sum);
+	return 0;
+}
