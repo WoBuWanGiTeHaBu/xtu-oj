@@ -1,0 +1,66 @@
+//要注意因为有不联通的情况，为了防止找不到min而搞出垃圾值的情况，所以用了<=
+
+
+#include<stdio.h>
+
+#define INF 0x3f3f3f3f
+
+//dingyi
+int main(){
+	int n,m;
+	scanf("%d %d",&n,&m);
+	int D[n+1][n+1];
+	int i,o;
+	for(i=1;i<n+1;i++){
+		for(o=1;o<n+1;o++){
+			if(i==o){
+				D[i][o]=0;
+			}else{
+				D[i][o]=INF;
+			}
+			
+		}
+	}
+	int a,b,c;
+	for(i=0;i<m;i++){
+		scanf("%d %d %d",&a,&b,&c);
+		D[a][b]=c;
+		D[b][a]=c;
+	}
+	int Q[n+1];
+	for(i=1;i<n+1;i++){
+		Q[i]=D[1][i];
+	}
+	int S[n+1];
+	for(i=0;i<n+1;i++){
+		S[i]=1;
+	}
+	S[1]=0;
+	int cnt=n-1;
+	while(cnt--){
+		int min=INF;
+		int temp=0;
+		for(i=1;i<=n;i++){
+			if(S[i]&&Q[i]<=min){
+				min=Q[i];
+				temp=i;
+			}
+		}
+		//printf("min=%d temp=%d\n",min,temp);
+		S[temp]=0;
+		for(i=1;i<n+1;i++){
+			if(S[i]&&Q[temp]+D[temp][i]<Q[i]){
+				//printf("Q[temp]+D[temp][i]=%d Q[i]=%d\n",Q[temp]+D[temp][i],Q[i]);
+				Q[i]=Q[temp]+D[temp][i];
+			}
+			
+		}
+		
+	}
+	if(Q[n]==INF){
+		printf("-1");
+	}else{
+		printf("%d\n",Q[n]);
+	}
+	return 0;
+}
