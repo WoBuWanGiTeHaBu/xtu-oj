@@ -1,0 +1,68 @@
+//Dijkstra不能用到有负数边的。
+// 但是Floyd是动态规划，可以；
+//还有一个Bellman-Ford不仅可以用还可以检测有没有负环。（n轮后还可以更新最短） 
+//Floyd和Bellman-Ford都是动态规划。Bellman-ford是单源点，找最近。
+//Floyd可以求任意两个点。所以bellman耗时短。但是bellman-Ford处理这个输入有点难受。
+//bellman是以边为循环条件的。外面的循环表示，这的最多允许走几条边，里面的表示这条边能不能用来作为扩充的。 
+
+
+
+
+
+
+#include<stdio.h>
+#define INF 0x3f3f3f3f
+
+
+int main(){
+    int n,v;
+    scanf("%d",&n);
+    scanf("%d",&v);
+    int D[n+1][n+1];
+    int i,o,k;
+    //鍒濆鍖?
+    for(i=0;i<n+1;i++){
+        for(o=0;o<n+1;o++){
+            if(i==0){
+                D[i][o]=0;
+            }else{
+                D[i][o]=INF;
+            }
+        }
+
+    }
+	char temp[100]; 
+    //杈撳叆
+    for(i=1;i<n+1;i++){
+        for(o=1;o<n+1;o++){
+            scanf("%s",&temp);
+            getchar();
+            if(temp[0]=='-'){
+                D[i][o]=INF;
+            }else{
+            	sscanf(temp,"%d",&D[i][o]);
+			}
+        }
+    }
+    //floyd
+    for(k=1;k<n+1;k++){
+        for(i=1;i<n+1;i++){
+            for(o=1;o<n+1;o++){
+                if(D[i][o]>D[i][k]+D[k][o]){
+                    D[i][o]=D[i][k]+D[k][o];
+                }
+
+            }
+        }
+    }
+    //杈撳嚭
+    for(i=1;i<n+1;i++){
+        //printf("v=%d\n",v);
+        if(i==v){
+            continue;
+        }
+        printf("(%d->%d)=%d\n",v,i,D[v][i]);
+    }
+
+    return 0;
+}
