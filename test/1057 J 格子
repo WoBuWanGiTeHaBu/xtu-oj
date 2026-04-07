@@ -1,0 +1,55 @@
+//经过这样那样的小巧思漏洞后走了老老实实的办法
+//一个一个棋子的宏观的看，然后找规律每次的可能乘上就行了。
+//分母概率保证不在同一个网格中（-i）分子概率保证不同行不同列。画下图体验一下，为什么要这样减 
+
+
+
+
+
+#include<stdio.h>
+long long gcd(long long a,long long b){
+	long long q;
+	q=a%b;
+	while(q){
+		a=b;
+		b=q;
+		q=a%b;
+	}
+	return b;
+}
+
+
+int main(){
+	int t;
+	scanf("%d",&t);
+	while(t--){
+		int n,m,k;
+		int i;
+		scanf("%d %d %d",&n,&m,&k);
+		if(k>n&&k>m){
+			printf("0\n");
+			continue;
+		}else if(k==1){
+			printf("1\n");
+			continue;
+		}
+		long long sun=1;
+		long long mum=1;
+		long long temp=(long long)n*m;
+		for(i=0;i<k;i++){
+			sun*=temp;
+			mum*=n*m-i;
+			long long g=gcd(sun,mum);
+			sun/=g;
+			mum/=g;
+			temp-=n+m-(2*i+1);
+		}
+		if(mum==1){
+			printf("%lld\n",sun);
+		}else{
+			printf("%lld/%lld\n",sun,mum);
+		}
+		
+	}
+	return 0;
+}
