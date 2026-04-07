@@ -1,0 +1,30 @@
+//数学题
+//错误：double输入用lf
+//因为精度，dab不能强制转换为int
+
+
+
+#include<stdio.h>
+#include<math.h>
+int main(){
+	int t;
+	scanf("%d",&t);
+	while(t--){
+		double ax,ay,ar,bx,by,br;
+		int arr=1;
+		scanf("%lf %lf %lf",&ax,&ay,&ar);
+		scanf("%lf %lf %lf",&bx,&by,&br);
+		double dab=sqrt((ax-bx)*(ax-bx)+(ay-by)*(ay-by));
+		if(dab==ar+br){
+			arr=4;
+		}else if(dab==fabs(ar-br)){
+			arr=2;
+		}else if(dab>fabs(ar-br)&&dab<ar+br){
+			arr=3;
+		}else if(dab>ar+br){
+			arr=5;
+		}
+		printf("%d\n",arr);
+	}
+	return 0;
+}
