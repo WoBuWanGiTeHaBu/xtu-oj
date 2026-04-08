@@ -1,0 +1,31 @@
+#include<stdio.h>
+//就是普普通通的，但是，这种题目要注意各种停止条件，还要实际值（i<=,a[i+m-1])
+//所以建议用一个实际例子来确定。
+//如果只有一个不确定的话，可以先随便选一个，不对就再该，仅限刷OJ，其他地方慎用。
+
+#include<string.h>
+int main(){
+	int n,m;
+	while(scanf("%d %d",&n,&m),n||m){
+		int a[n];
+		int i;
+		for(i=0;i<n;i++){
+			scanf("%d",&a[i]);
+		}
+		int max=0;
+		int sum=0;
+		for(i=0;i<m;i++){
+			sum+=a[i];
+		}
+		max=sum;
+		for(i=1;i<=n-m;i++){
+			if(sum-a[i-1]+a[i+m-1]>max){
+				max=sum-a[i-1]+a[i+m-1];
+			}
+			sum=sum-a[i-1]+a[i+m-1];
+			
+		}
+		printf("%d\n",max);
+	}
+	return 0;
+}
