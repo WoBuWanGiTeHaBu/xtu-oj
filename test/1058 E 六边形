@@ -1,0 +1,52 @@
+
+//不知道为什么，我之前也是这个思路，但是死活不能AC；
+//思路，观察可得，有两种小花，一种以中间的为花心，一种以内圈的为花心；
+//第一种的花由中年和内圈所以组成sum0；
+//第二种一定会有中间的一个算作花瓣。
+//因为是可旋转的，就分别找到，内圈和外圈最小的三个连在一起的数和，和中间那个全加起来就是第二种小花的最小值。
+//关于旋转，我是直接看作一条。在每圈的最前面和最后面加了一个位置，模拟一个环出来（配合代码食用） 
+
+#include<stdio.h>
+#include<string.h>
+int main(){
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        int n=0;
+        int nstr[8]={0};
+        int wstr[14]={0};
+        int i,o;
+        scanf("%d",&n);
+        for(i=1;i<7;i++){
+            scanf("%d",&nstr[i]);
+        }
+        nstr[0]=nstr[6];
+        nstr[7]=nstr[1];
+        for(i=1;i<13;i++){
+            scanf("%d",&wstr[i]);
+        }
+        wstr[0]=wstr[12];
+        wstr[13]=wstr[1];
+        int sum0=n+nstr[1]+nstr[2]+nstr[3]+nstr[4]+nstr[5]+nstr[6];
+        int nmin=1000000;
+        int wmin=1000000;
+        for(i=1;i<7;i++){
+            if(nstr[i-1]+nstr[i]+nstr[i+1]<nmin){
+                nmin=nstr[i-1]+nstr[i]+nstr[i+1];
+            }
+        }
+        for(i=1;i<13;i++){
+            if(wstr[i-1]+wstr[i]+wstr[i+1]<wmin){
+                wmin=wstr[i-1]+wstr[i]+wstr[i+1];
+            }
+        }
+        int sum1=n+nmin+wmin;
+        if(sum1<sum0){
+            printf("%d\n",sum1);
+        }else{
+            printf("%d\n",sum0);
+        }
+        
+    }
+    return 0;
+}
