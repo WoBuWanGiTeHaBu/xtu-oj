@@ -1,0 +1,30 @@
+//最简单的就是暴力枚举，但是会时间超限，所以把最后一层枚举改为验证
+//注意j要为double类型，不然sqrt出来之后会直接强制转换了，后面怎么样都是对的
+//为了防止无序排列重复出现，使结果虚大，按照大小关系设置
+
+
+
+#include<stdio.h>
+#include<math.h>
+int main(){
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        int n;
+        scanf("%d",&n);
+        int i,o;
+        double j=0;
+        int cnt =0;
+        for(i=1;i*i<n;i++){
+            for(o=i;o*o<n;o++){
+                j=sqrt(n-i*i-o*o);
+                if(j>=o&&(int)j==j){
+                    cnt++;
+                }
+            }
+        }
+        printf("%d\n",cnt);
+    }
+    
+    return 0;
+}
