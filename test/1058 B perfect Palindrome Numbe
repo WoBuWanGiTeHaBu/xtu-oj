@@ -1,0 +1,36 @@
+//首先明确完美回文数符合要求的就有11 1001 1111；
+//然后如果n有它们组成会%11==0，用来做筛选条件，防止时间超限。
+//因为要最少的所以最内层为1111（最大）
+
+
+
+#include<stdio.h>
+//11 1001 1111
+int main(){
+	int t;
+	scanf("%d",&t);
+	while(t--){
+		int n;
+		scanf("%d",&n);
+		int i,o,j;
+		int cnt =0;
+		if(n%11){
+			printf("0\n");
+			continue;
+		}
+		for(i=0;i*11<=n;i++){
+			for(o=0;o*1001<=n;o++){
+				for(j=0;j*1111<=n;j++){
+					if(i*11+o*1001+j*1111==n){
+						cnt=i+o+j;
+						goto next;
+					}
+				}
+			}
+		}
+		next:
+		printf("%d\n",cnt);
+	}
+	
+	return 0;
+}
