@@ -1,0 +1,30 @@
+//题目特意说了小数据放心枚举
+//这里while是输入0时停止的写法
+
+
+
+#include<stdio.h>
+#include<string.h>
+int main(){
+	int n;
+	while(scanf("%d",&n),n){
+		int str[n];
+		int i,o;
+		for(i=0;i<n;i++){
+			scanf("%d",&str[i]);
+		}
+		int cnt=0;
+		for(i=0;i<n;i++){
+			for(o=i+1;o<n;o++){
+				if(str[i]>str[o]){
+					cnt++;
+				}
+			}
+		}
+		printf("%d\n",cnt);
+		
+	}
+	
+	
+	return 0;
+}
