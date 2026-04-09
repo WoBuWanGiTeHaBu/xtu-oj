@@ -1,0 +1,33 @@
+//方法同上
+//这里补充一个怎么抽象：
+//画小方格，范围为贴着外围的n*m的方形网格，这极大的减少了抽象错误的可能性。
+
+
+#include<stdio.h>
+
+int main(){
+	int n;
+	while(scanf("%d",&n),n){
+		int i,o;
+		//
+		for(i=0;i<n-1;i++){
+			printf(" ");
+		}
+		printf("1\n");
+		//
+		for(i=1;i<=n-1;i++){
+			for(o=0;o<n-1-i;o++){
+				printf(" ");
+			}
+			for(o=1;o<=i;o++){
+				printf("%d",o);
+			}
+			printf("+");
+			for(o=i;o>0;o--){
+				printf("%d",o);
+			}
+			printf("\n");
+		}
+	}
+	return 0;
+}
