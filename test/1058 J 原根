@@ -1,0 +1,30 @@
+//思路就是利用上一题那个没用上的思路，有相同的就停止，可以剩下全部遍历的时间
+//错误：只temp*=2会溢出，变成乱七八糟的值，根据%的特性，每一步都%一下，%是不变的
+
+
+#include<stdio.h>
+#include<string.h>
+int main(){
+	int p;
+	while(scanf("%d",&p)!=EOF){
+		int s[p];
+		memset(s,0,sizeof(s));
+		int arr=1;
+		int temp=1;
+		int i;
+		for(i=1;i<p;i++){
+			temp=(temp*2)%p;
+			if(s[temp]==1){
+				arr=0;
+				break;
+			}
+			s[temp%p]=1;
+		}
+		if(arr){
+			printf("Yes\n");
+		}else{
+			printf("No\n");
+		}
+	} 
+	return 0;
+}
