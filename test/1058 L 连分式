@@ -1,0 +1,41 @@
+//就是要注意不要本来要用更新之前的值结果用了改变之后的值。
+//然后就是只轮一次的情况是不包含在for循环里的。要单独搞一次。 
+
+#include<stdio.h>
+
+long long gcd(long long a,long long b){
+	long long q;
+	q=a%b;
+	while(q){
+		a=b;
+		b=q;
+		q=a%b;
+	}
+	return b;
+}
+
+int main(){
+	int t;
+	scanf("%d",&t);
+	while(t--){
+		long long a,b,n;
+		scanf("%lld %lld %lld",&a,&b,&n);
+		long long sun=a;
+		long long mum=b;
+		long long g=gcd(sun,mum);
+			sun/=g;
+			mum/=g;
+		int i;
+		for(i=1;i<n;i++){
+			long long stemp=sun;
+			long long mtemp=mum;
+			sun=a*mtemp;
+			mum=stemp+b*mtemp;
+			long long g=gcd(sun,mum);
+			sun/=g;
+			mum/=g;
+		}
+		printf("%lld/%lld\n",sun,mum);
+	}
+	return 0;
+}
