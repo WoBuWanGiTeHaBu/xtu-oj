@@ -1,0 +1,54 @@
+//我这里随便命名了，知道自己在写哪个东西就行。
+//因为是面积重叠，所以边点重叠没事。 
+#include<stdio.h>
+
+int main(){
+	int t;
+	scanf("%d",&t);
+	while(t--){
+		int ax,ay,bx,by;
+		int min11,max11,min12,max12,min21,max21,min22,max22;
+		scanf("%d %d %d %d",&ax,&ay,&bx,&by);
+		if(ax>bx){
+			min11=bx;
+			max11=ax;
+		}else{
+			min11=ax;
+			max11=bx;
+		}
+		if(ay>by){
+			min12=by;
+			max12=ay;
+		}else{
+			min12=ay;
+			max12=by;
+		}
+		scanf("%d %d %d %d",&ax,&ay,&bx,&by);
+		if(ax>bx){
+			min21=bx;
+			max21=ax;
+		}else{
+			min21=ax;
+			max21=bx;
+		}
+		if(ay>by){
+			min22=by;
+			max22=ay;
+		}else{
+			min22=ay;
+			max22=by;
+		}
+		
+		int arr=0;
+		if(max11<=min21||max21<=min11||max22<=min12||max12<=min22){
+			arr=1;
+		}
+		if(arr){
+			printf("No\n");
+		}else{
+			printf("Yes\n");
+		}
+		
+	}
+	return 0;
+}
