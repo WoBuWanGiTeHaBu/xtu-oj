@@ -1,0 +1,60 @@
+//画图题，由具体的图像抽象为用n表示的东西，这样即使后面有错也不会太离谱。
+//根据实际与结果进行修改就行了。 
+
+
+#include<stdio.h>
+
+int main(){
+	int t;
+	scanf("%d",&t);
+	while(t--){
+		int n;
+		scanf("%d",&n);
+		int i,o;
+		//
+		for(i=1;i<n;i++){
+			printf("-");
+		}
+		printf("\n");
+		//
+		printf("\\");
+		for(i=0;i<n-3;i++){
+			printf(" ");
+		}
+		printf("/\n");
+		//
+		for(i=1;i<=n/2-2;i++){
+			for(o=0;o<i;o++){
+				printf(" ");
+			}
+			printf("\\");
+			for(o=0;o<n-3-2*i;o++){
+				printf("*");
+			}
+			printf("/\n");
+		}
+		//
+		for(i=0;i<=n/2-2;i++){
+			for(o=1;o<(n-4)/2-(i-1);o++){
+				printf(" ");
+			}
+			printf("/");
+			for(o=0;o<=i-1;o++){
+				printf(" ");
+			}
+			printf("*");
+			for(o=0;o<=i-1;o++){
+				printf(" ");
+			}
+			printf("\\\n");
+		}
+		//
+		for(i=1;i<n;i++){
+			printf("-");
+		}
+		printf("\n");
+		printf("\n");
+		
+	}
+	return 0;
+}
