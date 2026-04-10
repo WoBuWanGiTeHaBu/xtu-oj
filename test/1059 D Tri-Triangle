@@ -1,0 +1,62 @@
+
+
+#include<stdio.h>
+int main(){
+	char t;
+	while(scanf("%c",&t)!=EOF){
+		int n=t-'A'+1;
+		int i,o;
+		for(i=0;i<n;i++){
+			//
+			for(o=0;o<2*n-1-i;o++){
+				printf(" ");
+			}
+			//
+			for(o=0;o<=i;o++){
+				printf("%c",'A'+o);
+			}
+			//
+			for(o=1;o<=i;o++){
+				printf("%c",'A'+i-o);
+			}
+			printf("\n");
+		}
+		
+		for(i=0;i<n;i++){
+			//
+			for(o=0;o<n-1-i;o++){
+				printf(" ");
+			}
+			//
+			for(o=0;o<=i;o++){
+				printf("%c",'A'+o);
+			}
+			//
+			for(o=1;o<=i;o++){
+				printf("%c",'A'+i-o);
+			}
+			//
+			for(o=0;o<n-1-i;o++){
+				printf(" ");
+			}
+			printf(" ");
+			//
+			for(o=0;o<n-1-i;o++){
+				printf(" ");
+			}
+			//
+			for(o=0;o<=i;o++){
+				printf("%c",'A'+o);
+			}
+			//
+			for(o=1;o<=i;o++){
+				printf("%c",'A'+i-o);
+			}
+			printf("\n");
+		}
+		
+	}
+	
+	
+	return 0;
+}
