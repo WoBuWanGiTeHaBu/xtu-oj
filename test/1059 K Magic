@@ -1,0 +1,49 @@
+//冒泡排序
+
+#include<stdio.h> 
+void simple(int arr[]){
+    int i,o;
+    int temp;
+    for(i=0;i<3;i++){
+        for(o=0;o<3-i;o++){
+            if(arr[o]>arr[o+1]){
+                temp=arr[o+1];
+                arr[o+1]=arr[o];
+                arr[o]=temp;
+            }
+        }
+    }
+}
+int main(){
+    int n;
+    while(scanf("%d",&n),n){
+        int N=0;
+        if(n==6174){
+            N--;
+        }
+        while(1){
+            int a,b,c,d;
+            int arr[4]={0};
+            a=n%10;
+            b=n/10%10;
+            c=n/100%10;
+            d=n/1000;
+            arr[0]=a;
+            arr[1]=b;
+            arr[2]=c;
+            arr[3]=d;
+            simple(arr);
+             
+            int A,B;
+            A=arr[0]*1000+arr[1]*100+arr[2]*10+arr[3];
+            B=arr[3]*1000+arr[2]*100+arr[1]*10+arr[0];
+            n=B-A;
+            N++;
+            if(n==6174){
+                break;
+            }
+        }
+        printf("%d\n",N);
+    }
+    return 0;
+}
