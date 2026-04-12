@@ -1,0 +1,70 @@
+//先想好要怎么搞，把式子抽象出来再写代码
+
+
+#include<stdio.h>
+int main(){
+    char zm;
+    while(scanf("%c",&zm)!=EOF){
+    int n=zm-64;
+    char base = zm;
+    char shi[150][150]={0};
+    int i,o,k;
+    //lianggekongchu
+    for(i=0;i<n;i++){
+        for(k=0;k<n;k++){
+            shi[k][i]=' ';
+        }
+        for(o=3*n-1;o<4*n-1;o++){
+            shi[o][i]=' ';
+        }
+    }
+    //huanzhu
+    for(i=0;i<n;i++){
+        //hengzhe
+        int cnr=base-i;
+        //zhong
+        for(o=n+i;o<3*n-1-i;o++){
+            shi[0+i][o]=cnr;
+            shi[4*n-2-i][o]=cnr;
+        }
+        //qian
+        for(o=0+i;o<n+i+1;o++){
+            shi[n+i][o]=cnr;
+            shi[3*n-2-i][o]=cnr;    
+        }//HOU
+        for(o=3*n-2-i;o<4*n-1-i;o++){
+            shi[n+i][o]=cnr;
+            shi[3*n-2-i][o]=cnr;
+        }
+        //shuzhe
+         
+        //shang
+        for(o=0+i;o<n+3+i;o++){//kluyutf
+            shi[o][n+i]=cnr;
+            shi[o][3*n-2-i]=cnr;
+        }
+        //xia
+        for(o=3*n-1-i;o<4*n-i-1;o++){
+            shi[o][n+i]=cnr;
+            shi[o][3*n-2-i]=cnr;
+        }
+        //zhong
+        for(o=n+i;o<3*n-1-i;o++){
+            shi[o][0+i]=cnr;
+            shi[o][4*n-2-i]=cnr;
+        }
+ 
+    }
+    for(i=0;i<4*n-1;i++){
+        for(o=0;o<4*n-1;o++){
+            if(i<n&&o>3*n-2||i>3*n-2&&o>3*n-2){
+                break;
+            }
+            printf("%c",shi[i][o]);
+             
+        }
+        printf("\n");
+    }
+    }
+    return 0;
+}
