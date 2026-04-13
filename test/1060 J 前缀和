@@ -1,0 +1,43 @@
+//理解不了差分数组可以动手算一下。
+//注意范围，int可能超限
+//应该先还原a[0];
+
+
+#include<stdio.h>
+int main(){
+	int n,m;
+	scanf("%d %d",&n,&m);
+	long long a[n];
+	int i;
+	long long diff[n];
+	for(i=0;i<n;i++){
+		scanf("%lld",&a[i]);
+	}
+	diff[0]=a[0];
+	for(i=1;i<n;i++){
+		diff[i]=a[i]-a[i-1];
+	}
+	int l,r,d;
+	for(i=0;i<m;i++){
+		scanf("%d %d %d",&l,&r,&d);
+		diff[l-1]+=d;
+		if(r<n){
+			diff[r]-=d;
+		}
+		
+	}
+	long long sum[n];
+	a[0]=diff[0];
+	sum[0]=a[0];
+	for(i=1;i<n;i++){
+		a[i]=diff[i]+a[i-1];
+		sum[i]=sum[i-1]+a[i];
+	}
+	for(i=0;i<n-1;i++){
+		printf("%lld ",sum[i]);
+	}
+	printf("%lld\n",sum[n-1]);
+	
+	
+	return 0;
+} 
