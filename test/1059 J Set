@@ -1,0 +1,73 @@
+//暴力不可能，数据太大了
+//因为最多只经历一次+x和-y，所以各个数离最终相等的那个数差值有最多四种可能：+x -y +x-y 0；
+//因为有0的时候可能性最多，那我们假设最终那个数一开始就存在，那么各个数与某一个数直接的差值区别，最多有四种  
+//然后加上or减去某个数和最终值的差距，那就是要求的x，y；为了方便直接取第一个； 
+//不能单纯的按种类数判断，因为其实这四种是有联系的。
+
+#include<stdio.h>
+#include<stdlib.h>
+
+int cmp(const void *a, const void *b) {
+    return *(long long *)a - *(long long *)b;
+}
+
+int main() {
+    int k;
+    scanf("%d", &k);
+    while (k--) {
+        int n;
+        scanf("%d", &n);
+        long long a[n];
+        int i;
+        for (i = 0; i < n; i++) {
+            scanf("%lld", &a[i]);
+        }
+
+        // 计算所有元素与第一个元素的差值
+        long long diff[n];
+        for (i = 0; i < n; i++) {
+            diff[i] = a[i] - a[0];
+        }
+
+        // 去重
+        qsort(diff, n, sizeof(long long), cmp);
+        int cnt = 1;
+        for (i = 1; i < n; i++) {
+            if (diff[i] != diff[i-1]) {
+                cnt++;
+            }
+        }
+
+        // 最多4种差值
+        if (cnt > 4) {
+            printf("No\n");
+            continue;
+        }
+
+        // 提取去重后的差值
+        long long unique[4];
+        unique[0] = diff[0];
+        int idx = 1;
+        for (i = 1; i < n; i++) {
+            if (diff[i] != diff[i-1]) {
+                unique[idx++] = diff[i];
+            }
+        }
+
+        // 判断差值是否满足条件
+        int ok = 1;
+        if (cnt == 4) {
+            // 必须满足 unique[1] - unique[0] == unique[3] - unique[2]
+            if (unique[1] - unique[0] != unique[3] - unique[2]) {
+                ok = 0;
+            }
+        }
+
+        if (ok) {
+            printf("Yes\n");
+        } else {
+            printf("No\n");
+        }
+    }
+    return 0;
+}
