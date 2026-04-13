@@ -1,0 +1,40 @@
+#include<stdio.h>
+int main(){
+    char z;
+        int n=0;
+        int i;
+    while(scanf("%c",&z)&&z!='#'){
+        for(n=0;n<=z-65;n++){
+            for(i=z-n;i<z;i++){
+                printf("%c",i);
+            }
+            for(i=z;i>65+n;i--){
+                printf("%c",i);
+            }
+            for(i=65+n;i<z;i++){
+                printf("%c",i);
+            }
+            for(i=z;i>z-n;i--){
+                printf("%c",i);
+            }
+            printf("%c\n",i);
+        }
+        n=n-2;
+        for(;n>=0;n--){
+            for(i=z-n;i<z;i++){
+                printf("%c",i);
+            }
+            for(i=z;i>65+n;i--){
+                printf("%c",i);
+            }
+            for(i=65+n;i<z;i++){
+                printf("%c",i);
+            }
+            for(i=z;i>z-n;i--){
+                printf("%c",i);
+            }
+            printf("%c\n",i);
+        }
+    }
+    return 0;
+}
