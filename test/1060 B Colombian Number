@@ -1,0 +1,39 @@
+//考虑到，k再怎么大，K的位数的最大和也不会特别大，到后面k肯定接近n。所以最大为K的位数*99，但是K的位数为止，直接用n的位数。找到了就跳过，没找到就继续。
+//错误：没有用temp值，直接用了原值。循环的时候把循环变量的值改变了。
+
+
+#include<stdio.h>
+int main(){
+	int k;
+	scanf("%d",&k);
+	while(k--){
+		int n;
+		scanf("%d",&n);
+		int i;
+		int temp=n;
+		int cnt=0;
+		while(temp){
+			temp/=10;
+			cnt++;
+		}
+		int arr=0;
+		for(i=n-cnt*9;i<n;i++){
+			temp=i;
+			int brr=i;
+			while(brr){
+				temp+=brr%10;
+				brr/=10;
+			}
+			if(temp==n){
+				arr=1;
+				break;
+			}
+		}
+		if(arr){
+			printf("No\n");
+		}else{
+			printf("Yes\n");
+		}
+	}	
+	return 0;
+}
