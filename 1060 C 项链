@@ -1,0 +1,65 @@
+//遍历枚举，感觉没有什么其他的好方法
+
+
+#include<stdio.h>
+int main(){
+    int T;
+    scanf("%d",&T);
+    while(T--){
+        int n;
+        scanf("%d",&n);
+        int a[2*n];
+        int b[2*n];
+        int c[n];
+        int i,o;
+        int arr=0;
+        for(i=0;i<n;i++){
+            scanf("%d",&a[i]);
+            a[i+n]=a[i];
+        }
+        for(i=0;i<n;i++){
+            scanf("%d",&c[i]);
+        }
+        for(i=0;i<n+1;i++){
+            if(arr){
+                puts("Yes");
+                break;
+            }
+            for(o=0;o<n;o++){
+                if(a[i+o]!=c[o]){
+                    break;
+                }
+                if(o==n-1){
+                    arr=1;
+                }
+            }
+        }
+        int brr=0;
+        if(arr!=1){
+            for(i=0;i<2*n;i++){
+                b[i]=a[2*n-1-i];
+            }
+             
+            for(i=0;i<n+1;i++){
+                if(brr){
+                    puts("Yes");
+                    break;
+                }
+                for(o=0;o<n;o++){
+                    if(b[i+o]!=c[o]){
+                        break;
+                    }
+                    if(o==n-1){
+                        brr=1;
+                    }
+                }
+            }
+        }
+        if(arr==0&&brr==0){
+            puts("No");
+        }
+         
+    }
+     
+    return 0;
+}
