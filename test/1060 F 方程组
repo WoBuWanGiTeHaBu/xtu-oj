@@ -1,0 +1,51 @@
+//类似于勾股数
+//在选择sqrt和cbrt的时候，我认为cbrt更适合，因为这样不用考虑符号问题，但是cbrt速度太慢，超时了
+//所以还是sqrt
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+typedef long long loo;
+int main(){
+    int T;
+    scanf("%d",&T);
+    while(T--){
+        loo n,m;
+        int arr=0;
+        loo ept;
+        scanf("%lld %lld",&n,&m);
+        loo i;
+        loo o;
+        ept=ceil(sqrt(m));
+        for(i=-ept;i<=ept;i++){
+            o=sqrt(m-i*i);
+            if(o*o==m-i*i){
+                loo k=i*i*i;
+                loo p=o*o*o;
+                if(k+p==n){
+                    arr=1;
+                    if(i<o){
+                        printf("%d %d\n",i,o);
+                    }else{
+                        printf("%d %d\n",o,i);
+                    }
+                    break;
+                }else if(k-p==n){
+                    arr=1;
+                    if(i<o){
+                        printf("%d %d\n",i,-o);
+                    }else{
+                        printf("%d %d\n",-o,i);
+                    }
+                    break;
+                }
+            }
+        }
+        if(arr){
+            continue;
+        }else{
+            puts("0");
+        }
+    }
+    return 0;
+}
