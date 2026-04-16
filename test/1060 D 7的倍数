@@ -1,0 +1,30 @@
+// 原数%7要么直接是倍数不用改，要么有余数r所以在末尾加了个数之后 A×10 + x = (7k + r)×10 + x = 70k + 10r + x
+//所以能不能被整除，只看 10r+x;
+//因为r有固定的几个取值1-6（0不考虑）都有相应的个位数x%7=0；所以遍历之后一定可以找到那个数。因为不考虑大小，直接输出就行了。 
+
+#include<stdio.h>
+#include<string.h>
+int main(){
+    char a[10010];
+    while(scanf("%s",a)!=EOF){
+        int i,o;
+        int r=0;
+        int len=strlen(a);
+        for(o=0;o<len;o++){
+                r=(r*10+a[o]-'0')%7;
+        }
+        if(r==0){
+            printf("0\n%s\n",a);
+            continue;
+        }else{
+            for(i=1;i<10;i++){
+                int m=(r*10+i)%7;
+                if(m==0){
+                    printf("1\n%s%d\n",a,i);
+                    break;
+                }
+            }
+        }
+    }
+    return  0;
+}
