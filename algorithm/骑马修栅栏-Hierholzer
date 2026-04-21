@@ -1,0 +1,96 @@
+//Hierholzer算法
+//思路：要过每一条边，不重边，但是点可重，就是求欧拉路径（半欧拉 
+//因为这种保证联通图的特性，走完所有边只有两种可能，一种是 从偶度数点出发，那么最终回形成回路，从奇度数点出发，最后一定是在另一个奇度数点停止
+//Hierholzer算法首先是找起点（其实是找奇点，没有默认最小1
+//然后从起点开始走每次最小的点，再从最小的点走到连接这个点的最小的点，直到无路可走，标记后回撤（递归
+//不用担心走错路，这是这种图的特殊性决定了它会是对的。，不理解回撤和选择路径的可以自己画个图试一下
+//这里是dfs（depth first search/深度优先搜索/一条路走到黑，撞南墙再回头）递归 ，dfs是 算法思想，递归是实现手段 
+//找点的同时还要删除走过的边，还有度数，才能正常运行，都是停止条件。 
+
+
+
+#include<stdio.h>
+
+int temp=0;
+int adj[505][505]={0};
+int cnt[505]={0};
+int path[1500]={0};	
+int n=0;
+
+
+void sort(int i){
+	int u,v;
+	temp=0;
+	for(u=0;u<cnt[i];u++){
+		for(v=u+1;v<cnt[i];v++){
+			if(adj[i][u]>adj[i][v]){
+				temp=adj[i][u];
+				adj[i][u]=adj[i][v];
+				adj[i][v]=temp;
+			}
+		}
+		
+	}
+}
+
+void del(int arr){
+	int i,o;
+	temp=adj[arr][0];
+	for(i=0;i<cnt[arr]-1;i++){
+		adj[arr][i]=adj[arr][i+1];
+	}
+	for(i=0;i<cnt[temp];i++){
+		if(adj[temp][i]==arr){
+			for(o=0;o<cnt[temp]-i;o++){
+				adj[temp][i+o]=adj[temp][i+1+o];
+			}
+			cnt[temp]--;
+			break;
+		}
+	}
+	cnt[arr]--;
+	
+}
+
+
+void dfs(int arr){
+	while(cnt[arr]){
+		del(arr);
+		dfs(temp);
+	}
+	path[n++]=arr;
+}
+
+	
+int main(){
+	int f;
+	int i,o;
+	int a,b;
+	scanf("%d",&f);
+	for(i=0;i<f;i++){
+		scanf("%d %d",&a,&b);
+		adj[a][cnt[a]++]=b;
+		adj[b][cnt[b]++]=a;
+	}
+	//printf("here1\n");
+	for(i=0;i<505;i++){
+		if(cnt[i]>0){
+			sort(i);
+		}	
+	}
+	//printf("here2\n");
+	int arr=1;
+	for(i=0;i<505;i++){
+		if(cnt[i]%2==1){
+			arr=i;
+			break;
+		}
+	}
+	//printf("here3\n");
+	dfs(arr);
+	//printf("here4\n");
+	for(i=n-1;i>=0;i--){
+		printf("%d\n",path[i]);
+	}
+	return 0;
+}
