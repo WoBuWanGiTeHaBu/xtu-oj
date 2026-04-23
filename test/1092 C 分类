@@ -1,0 +1,59 @@
+//计算机真的没有黑魔法吗？为什么我总是想不出来。。。这个思路是CSDN上的 
+//可以用二分法来寻找最适合的最小值，把最小值设为mid，如果mid，然后判断，这个最小值能否成立，如果可以，那就在找更小的值（去掉右边），反之左边
+//check函数判断最小值能否成立的依据是：先假定这个就是所有最大差值（每组内）的最小值，那么每一个组的最大差值就不能》mid
+//如果》mid了，那就不是这个组的，以这个数为开头，开另一个组，看看最后的组数，如果组数》m了那么就不可能。
+//在这个过程中如果》m了那就直接剪枝，至于最后为什么不直接写成 return1 不太懂，但是它这么做一定有它的道理 
+
+
+#include<stdlib.h>
+#include<stdio.h>
+
+int cmp(const void* a,const void* b){
+	int q=*(int*)a;
+	int h=*(int*)b;
+	return q-h;
+}
+int n,m;
+int a[10005]={0};
+int check(int mid){
+	int grop=1;
+	int i;
+	int start=a[0];
+	for(i=1;i<n;i++){
+		if(a[i]-start>mid){
+			grop++;
+			start=a[i];
+			if(grop>m) return 0;
+		}
+	}
+	return grop<=m;
+}
+
+int main(){
+	int t;
+	scanf("%d",&t);
+	while(t--){
+
+		scanf("%d %d",&n,&m);
+		int i,o;
+		
+		for(i=0;i<n;i++){
+			scanf("%d",&a[i]);
+		}
+		qsort(a,n,sizeof(int),cmp);
+		int l=0;
+		int r=a[n-1]-a[0];
+		int ans=r;
+		while(l<=r){
+			int mid=l+(r-l)/2;
+			if(check(mid)){
+				ans=mid;
+				r=mid-1;
+			}else{
+				l=mid+1;
+			}
+		}
+		printf("%d\n",ans);
+	}
+	return 0;
+}
